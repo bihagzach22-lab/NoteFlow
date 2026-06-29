@@ -1,0 +1,78 @@
+<section class="login-page">
+  <div class="login-card">
+    <a routerLink="/" class="brand-row brand-link" aria-label="Go back to NoteFlow home">
+      <span class="brand-mark">N</span>
+      <strong>NoteFlow</strong>
+    </a>
+
+    <div class="login-header">
+      <p class="eyebrow">Welcome back</p>
+      <h1>Log in to your workspace.</h1>
+      <p class="subtitle">
+        Continue writing, organizing, and searching your personal notes.
+      </p>
+    </div>
+
+    <form class="login-form" (ngSubmit)="login()">
+      <label>
+        Email
+        <input
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          placeholder="Enter your email"
+          autocomplete="email"
+          [disabled]="loading"
+        />
+      </label>
+
+      <label>
+        Password
+        <input
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+          [disabled]="loading"
+        />
+      </label>
+
+      <p class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </p>
+
+      <button type="submit" class="login-button" [disabled]="loading">
+        {{ loading ? 'Logging in...' : 'Log in' }}
+      </button>
+    </form>
+
+    <p class="register-text">
+      New to NoteFlow?
+      <a routerLink="/register">Create account</a>
+    </p>
+  </div>
+
+  <div class="login-visual">
+    <div class="visual-bg-circle circle-one"></div>
+    <div class="visual-bg-circle circle-two"></div>
+
+    <div class="floating-note note-one">
+      <span>Pinned</span>
+      <strong>Project ideas</strong>
+      <p>Keep your most important thoughts easy to find.</p>
+    </div>
+
+    <div class="floating-note note-two">
+      <span>Today</span>
+      <strong>Quick reminders</strong>
+      <p>Pick up exactly where you left off.</p>
+    </div>
+
+    <div class="floating-note note-three">
+      <span>Search</span>
+      <strong>#angular #notes</strong>
+      <p>Find your saved ideas faster.</p>
+    </div>
+  </div>
+</section>

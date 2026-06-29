@@ -1,0 +1,28 @@
+<section class="verify-page">
+  <div class="verify-card">
+    <a routerLink="/" class="brand-row">
+      <span class="brand-mark">N</span>
+      <strong>NoteFlow</strong>
+    </a>
+
+    <div *ngIf="loading">
+      <p class="eyebrow">Please wait</p>
+      <h1>Verifying your email...</h1>
+      <p>We are activating your NoteFlow account.</p>
+    </div>
+
+    <div *ngIf="!loading && successMessage">
+      <p class="eyebrow success">Verified</p>
+      <h1>Email verified.</h1>
+      <p>{{ successMessage }}</p>
+      <a routerLink="/login" class="verify-button">Continue to login</a>
+    </div>
+
+    <div *ngIf="!loading && errorMessage">
+      <p class="eyebrow error">Failed</p>
+      <h1>Verification failed.</h1>
+      <p>{{ errorMessage }}</p>
+      <a routerLink="/register" class="verify-button">Create account again</a>
+    </div>
+  </div>
+</section>

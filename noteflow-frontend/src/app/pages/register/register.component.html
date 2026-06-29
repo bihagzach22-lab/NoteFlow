@@ -1,0 +1,102 @@
+<section class="register-page">
+  <div class="register-card">
+    <a routerLink="/" class="brand-row brand-link" aria-label="Go back to NoteFlow home">
+      <span class="brand-mark">N</span>
+      <strong>NoteFlow</strong>
+    </a>
+
+    <div class="register-header">
+      <p class="eyebrow">Create account</p>
+      <h1>Start your NoteFlow workspace.</h1>
+      <p class="subtitle">
+        Create your account and start organizing your notes securely.
+      </p>
+    </div>
+
+    <form class="register-form" (ngSubmit)="register()">
+      <label>
+        Full name
+        <input
+          type="text"
+          name="fullName"
+          [(ngModel)]="fullName"
+          placeholder="Enter your full name"
+          autocomplete="name"
+          [disabled]="loading"
+        />
+      </label>
+
+      <label>
+        Email
+        <input
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          placeholder="Enter your email"
+          autocomplete="email"
+          [disabled]="loading"
+        />
+      </label>
+
+      <label>
+        Password
+        <input
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          placeholder="Minimum 6 characters"
+          autocomplete="new-password"
+          [disabled]="loading"
+        />
+      </label>
+
+      <label>
+        Confirm password
+        <input
+          type="password"
+          name="confirmPassword"
+          [(ngModel)]="confirmPassword"
+          placeholder="Confirm your password"
+          autocomplete="new-password"
+          [disabled]="loading"
+        />
+      </label>
+
+      <p class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </p>
+
+      <button type="submit" class="register-button" [disabled]="loading">
+        {{ loading ? 'Creating account...' : 'Create account' }}
+      </button>
+    </form>
+
+    <p class="login-text">
+      Already have an account?
+      <a routerLink="/login">Log in</a>
+    </p>
+  </div>
+
+  <div class="register-visual">
+    <div class="visual-bg-circle circle-one"></div>
+    <div class="visual-bg-circle circle-two"></div>
+
+    <div class="floating-note note-one">
+      <span>Step 1</span>
+      <strong>Create account</strong>
+      <p>Use your name, email, and secure password.</p>
+    </div>
+
+    <div class="floating-note note-two">
+      <span>Step 2</span>
+      <strong>Log in safely</strong>
+      <p>Access your personal NoteFlow workspace.</p>
+    </div>
+
+    <div class="floating-note note-three">
+      <span>Step 3</span>
+      <strong>Start writing</strong>
+      <p>Create, pin, organize, and search your notes.</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,85 @@
+<div class="app-layout">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-mark">N</span>
+      <strong>NoteFlow</strong>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/notes" routerLinkActive="active">Notes</a>
+      <a routerLink="/admin" *ngIf="authService.isAdmin()">Admin</a>
+      <a routerLink="/">Landing page</a>
+      <button type="button" (click)="authService.logout()">Log out</button>
+    </nav>
+  </aside>
+
+  <main class="app-content">
+    <header class="topline">
+      <div>
+        <h1>Hello, {{ authService.getCurrentUser()?.fullName || 'writer' }}.</h1>
+        <p>Here is your note workspace overview.</p>
+      </div>
+      <a routerLink="/notes" class="btn btn-blue">Open notes board</a>
+    </header>
+
+    <section class="stats-grid">
+      <article class="stat-card card">
+        <span>Total notes</span>
+        <strong>{{ activeNotes.length }}</strong>
+      </article>
+      <article class="stat-card card">
+        <span>Pinned</span>
+        <strong>{{ pinnedNotes.length }}</strong>
+      </article>
+      <article class="stat-card card">
+        <span>Archived</span>
+        <strong>{{ archivedNotes.length }}</strong>
+      </article>
+      <article class="stat-card card">
+        <span>Categories</span>
+        <strong>4</strong>
+      </article>
+    </section>
+
+    <section class="dashboard-grid">
+      <article class="quick-note card">
+        <div class="card-heading">
+          <div>
+            <p class="section-kicker">Quick capture</p>
+            <h2>Create a note fast</h2>
+          </div>
+        </div>
+
+        <form (ngSubmit)="createQuickNote()">
+          <input class="input" type="text" name="quickTitle" [(ngModel)]="quickTitle" placeholder="Note title">
+          <textarea class="textarea" name="quickContent" [(ngModel)]="quickContent" placeholder="Write a quick idea..."></textarea>
+          <button class="btn btn-primary" type="submit">Save quick note</button>
+        </form>
+      </article>
+
+      <article class="recent card">
+        <div class="card-heading">
+          <div>
+            <p class="section-kicker">Recent</p>
+            <h2>Latest notes</h2>
+          </div>
+          <a routerLink="/notes">View all</a>
+        </div>
+
+        <div class="empty-state" *ngIf="recentNotes.length === 0">No notes yet. Create your first note.</div>
+
+        <div class="recent-list">
+          <div class="recent-item" *ngFor="let note of recentNotes">
+            <span [class]="'color-dot ' + note.color"></span>
+            <div>
+              <strong>{{ note.title }}</strong>
+              <p>{{ note.content | slice:0:90 }}{{ note.content.length > 90 ? '...' : '' }}</p>
+            </div>
+            <small>{{ note.updatedAt | date:'shortDate' }}</small>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+</div>

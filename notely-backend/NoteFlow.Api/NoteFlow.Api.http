@@ -1,0 +1,49 @@
+@baseUrl = http://localhost:5230
+@token = PASTE_TOKEN_HERE
+
+### Health check
+GET {{baseUrl}}/api/health
+
+
+### Register user
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Test User",
+  "email": "user@noteflow.test",
+  "password": "user123"
+}
+
+
+### Login user
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@noteflow.test",
+  "password": "user123"
+}
+
+
+### Get current user
+GET {{baseUrl}}/api/auth/me
+Authorization: Bearer {{token}}
+
+
+### Create note
+POST {{baseUrl}}/api/notes
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "My first note",
+  "content": "This note is saved in Supabase through ASP.NET Core.",
+  "category": "Personal",
+  "color": "blue"
+}
+
+
+### Get my notes
+GET {{baseUrl}}/api/notes
+Authorization: Bearer {{token}}

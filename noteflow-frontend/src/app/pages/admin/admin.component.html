@@ -1,0 +1,84 @@
+<div class="app-layout">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-mark">N</span>
+      <strong>NoteFlow</strong>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a routerLink="/dashboard">Dashboard</a>
+      <a routerLink="/notes">Notes</a>
+      <a routerLink="/admin" routerLinkActive="active">Admin</a>
+      <a routerLink="/">Landing page</a>
+      <button type="button" (click)="authService.logout()">Log out</button>
+    </nav>
+  </aside>
+
+  <main class="app-content">
+    <header class="topline">
+      <div>
+        <h1>Admin dashboard</h1>
+        <p>Frontend admin placeholder for managing users and note app metrics.</p>
+      </div>
+    </header>
+
+    <section class="admin-stats">
+      <article class="card stat-card">
+        <span>Registered users</span>
+        <strong>{{ users.length }}</strong>
+      </article>
+      <article class="card stat-card">
+        <span>Active notes</span>
+        <strong>{{ activeNotes }}</strong>
+      </article>
+      <article class="card stat-card">
+        <span>API status</span>
+        <strong>Mock</strong>
+      </article>
+    </section>
+
+    <section class="admin-grid">
+      <article class="card admin-panel">
+        <div class="panel-heading">
+          <p class="section-kicker">Users</p>
+          <h2>Accounts</h2>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Created</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users">
+                <td>{{ user.fullName }}</td>
+                <td>{{ user.email }}</td>
+                <td><span class="role-pill">{{ user.role }}</span></td>
+                <td>{{ user.createdAt | date:'mediumDate' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="card admin-panel api-panel">
+        <div class="panel-heading">
+          <p class="section-kicker">Backend next</p>
+          <h2>API connection checklist</h2>
+        </div>
+
+        <ul>
+          <li>Replace mock auth with ASP.NET Core Identity or custom JWT endpoints.</li>
+          <li>Move notes from localStorage to PostgreSQL.</li>
+          <li>Protect admin endpoints with the Admin role.</li>
+          <li>Use the existing JWT interceptor for authenticated requests.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+</div>

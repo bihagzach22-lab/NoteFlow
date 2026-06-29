@@ -1,0 +1,189 @@
+<div class="marketing-shell">
+  <header class="nav">
+    <div class="container nav-inner">
+      <a routerLink="/" class="logo">
+        <span class="brand-mark">N</span>
+        <strong>NoteFlow</strong>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#workspace">Workspace</a>
+        <a href="#workflow">Workflow</a>
+      </nav>
+
+      <div class="nav-actions" *ngIf="!authService.isLoggedIn(); else loggedInNav">
+        <a routerLink="/login" class="btn btn-ghost">Log in</a>
+        <a routerLink="/register" class="btn btn-primary">Create account</a>
+      </div>
+
+      <ng-template #loggedInNav>
+        <div class="nav-actions">
+          <a routerLink="/dashboard" class="btn btn-light">Open app</a>
+        </div>
+      </ng-template>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero reveal-on-scroll">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal-on-scroll">
+          <span class="badge">Personal note workspace</span>
+          <h1 class="hero-title phrase-title">
+            <span class="headline-phrase" style="--i: 1">
+              Capture ideas faster.
+            </span>
+
+            <span class="headline-phrase" style="--i: 2">
+              Organize your notes smarter.
+            </span>
+
+            <span class="headline-phrase" style="--i: 3">
+              Find everything when you need it.
+            </span>
+          </h1>
+          <p>
+            A clean Angular note app for writing, pinning, tagging,
+            searching, and managing your notes with an ASP.NET Core API.
+          </p>
+          <div class="hero-actions">
+            <a routerLink="/register" class="btn btn-blue">Start writing</a>
+            <a routerLink="/login" class="btn btn-light">Log in</a>
+          </div>
+          <div class="hero-meta">
+            <span>✓ Angular 13</span>
+            <span>✓ ASP.NET Core API</span>
+            <span>✓ Supabase PostgreSQL</span>
+          </div>
+        </div>
+
+        <div class="hero-product card reveal-on-scroll" id="workspace">
+          <div class="product-toolbar">
+            <div>
+              <strong>My Workspace</strong>
+              <p>Today · 6 notes</p>
+            </div>
+            <button class="mini-button">+ New</button>
+          </div>
+
+          <div class="search-preview">Search notes, tags, projects...</div>
+
+          <div class="note-preview-grid">
+            <article class="note-preview yellow">
+              <span>Pinned</span>
+              <h3>Project roadmap</h3>
+              <p>Landing page, auth screens, dashboard, notes CRUD, API connection.</p>
+              <div class="tags"><small>#angular</small><small>#backend</small></div>
+            </article>
+
+            <article class="note-preview blue">
+              <span>Study</span>
+              <h3>Exam reminders</h3>
+              <p>Review definitions, write examples, and summarize key points.</p>
+              <div class="tags"><small>#school</small><small>#review</small></div>
+            </article>
+
+            <article class="note-preview green">
+              <span>Personal</span>
+              <h3>Daily checklist</h3>
+              <p>Plan tasks, track errands, and save important quick thoughts.</p>
+              <div class="tags"><small>#tasks</small><small>#daily</small></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features-section reveal-on-scroll" id="features">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-kicker">Features</p>
+          <h2 class="section-title">Built like a real note app frontend.</h2>
+          <p class="section-copy">
+            This is not only a landing page. The frontend already includes the screens and logic needed
+            before connecting to a real ASP.NET Core API.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article
+            class="feature-card card reveal-on-scroll"
+            *ngFor="let feature of features; let i = index"
+            [style.--delay]="i">
+            <div class="feature-icon">{{ feature.icon }}</div>
+            <h3>{{ feature.title }}</h3>
+            <p>{{ feature.text }}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace-section reveal-on-scroll">
+      <div class="container workspace-grid">
+        <div>
+          <p class="section-kicker">Dashboard</p>
+          <h2 class="section-title">Manage notes from one focused workspace.</h2>
+          <p class="section-copy">
+            Users can log in, see note statistics, create quick notes, open the full notes board,
+            and later sync every note through your backend database.
+          </p>
+          <a routerLink="/login" class="btn btn-primary">Open dashboard</a>
+        </div>
+
+        <div class="dashboard-preview card reveal-on-scroll">
+          <div class="stat-row">
+            <div><strong>12</strong><span>Total notes</span></div>
+            <div><strong>4</strong><span>Pinned</span></div>
+            <div><strong>8</strong><span>Tags</span></div>
+          </div>
+          <div class="task-list">
+            <label><input type="checkbox" checked> Build landing page</label>
+            <label><input type="checkbox" checked> Add login and signup</label>
+            <label><input type="checkbox"> Connect ASP.NET API</label>
+            <label><input type="checkbox"> Deploy frontend to Vercel</label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="workflow-section reveal-on-scroll" id="workflow">
+      <div class="container">
+        <div class="section-heading compact">
+          <p class="section-kicker">Workflow</p>
+          <h2 class="section-title">Simple enough for daily use.</h2>
+        </div>
+
+        <div class="step-grid">
+          <div
+            class="step-card reveal-on-scroll"
+            *ngFor="let step of steps; let i = index"
+            [style.--delay]="i">
+            <span>{{ i + 1 }}</span>
+            <strong>{{ step }}</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section reveal-on-scroll">
+      <div class="container cta-card">
+        <div>
+          <p class="section-kicker">Frontend ready</p>
+          <h2>Start with the Angular app now. Connect the backend next.</h2>
+        </div>
+        <a routerLink="/register" class="btn btn-light">Create free account</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a routerLink="/" class="logo small">
+        <span class="brand-mark">N</span>
+        <strong>NoteFlow</strong>
+      </a>
+      <span>Angular 13 note-taking frontend · API-ready</span>
+    </div>
+  </footer>
+</div>

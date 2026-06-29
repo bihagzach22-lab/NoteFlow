@@ -1,0 +1,101 @@
+.verify-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 221, 150, 0.35), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(180, 209, 255, 0.34), transparent 30%),
+    #fbf6ea;
+}
+
+.verify-card {
+  width: min(520px, 100%);
+  padding: 38px;
+  border: 1px solid rgba(31, 31, 31, 0.1);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 24px 70px rgba(22, 18, 10, 0.1);
+  animation: verifyEnter 320ms ease both;
+}
+
+.brand-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 34px;
+  color: #111;
+  text-decoration: none;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #111;
+  color: #fff;
+  font-weight: 900;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: #3f7ee8;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.eyebrow.success {
+  color: #16a34a;
+}
+
+.eyebrow.error {
+  color: #dc2626;
+}
+
+.verify-card h1 {
+  margin: 0 0 12px;
+  color: #111;
+  font-size: clamp(34px, 6vw, 52px);
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+.verify-card p {
+  color: #5e6470;
+  line-height: 1.7;
+}
+
+.verify-button {
+  display: inline-flex;
+  margin-top: 18px;
+  padding: 13px 18px;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  font-weight: 900;
+  text-decoration: none;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.verify-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(17, 17, 17, 0.18);
+}
+
+@keyframes verifyEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.99);
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}

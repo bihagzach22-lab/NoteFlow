@@ -1,0 +1,16 @@
+# Backend secrets
+notely-backend/NoteFlow.Api/appsettings.Development.json
+
+# .NET build files
+notely-backend/NoteFlow.Api/bin/
+notely-backend/NoteFlow.Api/obj/
+
+# Angular dependencies and build
+noteflow-frontend/node_modules/
+noteflow-frontend/dist/
+noteflow-frontend/.angular/
+
+# VS Code / Windows
+.vscode/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,123 @@
+<div class="app-layout">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-mark">N</span>
+      <strong>NoteFlow</strong>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a routerLink="/dashboard">Dashboard</a>
+      <a routerLink="/notes" routerLinkActive="active">Notes</a>
+      <a routerLink="/admin" *ngIf="authService.isAdmin()">Admin</a>
+      <a routerLink="/">Landing page</a>
+      <button type="button" (click)="authService.logout()">Log out</button>
+    </nav>
+  </aside>
+
+  <main class="app-content">
+    <header class="topline">
+      <div>
+        <h1>Notes board</h1>
+        <p>Create, edit, search, pin, archive, and delete notes.</p>
+      </div>
+    </header>
+
+    <section class="notes-grid-layout">
+      <article class="editor card">
+        <div class="editor-header">
+          <div>
+            <p class="section-kicker">{{ editingNoteId ? 'Editing' : 'New note' }}</p>
+            <h2>{{ modeLabel }}</h2>
+          </div>
+          <button class="btn btn-light" type="button" (click)="resetForm()" *ngIf="editingNoteId">Cancel</button>
+        </div>
+
+        <form (ngSubmit)="saveNote()">
+          <div class="form-field">
+            <label for="title">Title</label>
+            <input id="title" name="title" class="input" type="text" [(ngModel)]="form.title" placeholder="Example: Meeting notes">
+          </div>
+
+          <div class="form-field">
+            <label for="content">Content</label>
+            <textarea id="content" name="content" class="textarea" [(ngModel)]="form.content" placeholder="Write your note here..."></textarea>
+          </div>
+
+          <div class="two-col">
+            <div class="form-field">
+              <label for="category">Category</label>
+              <select id="category" name="category" class="select" [(ngModel)]="form.category">
+                <option *ngFor="let category of categories" [value]="category" [disabled]="category === 'All'">{{ category }}</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="tags">Tags</label>
+              <input id="tags" name="tags" class="input" type="text" [(ngModel)]="form.tagsText" placeholder="project, school, urgent">
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label>Color</label>
+            <div class="color-picker">
+              <button
+                type="button"
+                *ngFor="let color of colorOptions"
+                [class]="'color-choice ' + color"
+                [class.selected]="form.color === color"
+                (click)="form.color = color"
+                [attr.aria-label]="'Choose ' + color + ' color'">
+              </button>
+            </div>
+          </div>
+
+          <button class="btn btn-blue full" type="submit">{{ modeLabel }}</button>
+        </form>
+      </article>
+
+      <section class="board-area">
+        <div class="filters card">
+          <input class="input" type="search" [(ngModel)]="searchTerm" placeholder="Search notes, content, or tags..." name="searchTerm">
+
+          <select class="select" [(ngModel)]="selectedCategory" name="selectedCategory">
+            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+          </select>
+
+          <button class="btn btn-light" type="button" (click)="showArchived = !showArchived">
+            {{ showArchived ? 'Show active' : 'Show archived' }}
+          </button>
+        </div>
+
+        <div class="empty-state" *ngIf="filteredNotes.length === 0">
+          No matching notes found.
+        </div>
+
+        <div class="notes-grid">
+          <article [class]="'note-card card ' + note.color" *ngFor="let note of filteredNotes; trackBy: trackByNote">
+            <div class="note-card-top">
+              <span>{{ note.category }}</span>
+              <button type="button" (click)="togglePin(note)">{{ note.pinned ? '★' : '☆' }}</button>
+            </div>
+
+            <h3>{{ note.title }}</h3>
+            <p>{{ note.content }}</p>
+
+            <div class="note-tags" *ngIf="note.tags.length">
+              <small *ngFor="let tag of note.tags">#{{ tag }}</small>
+            </div>
+
+            <div class="note-meta">
+              <small>Updated {{ note.updatedAt | date:'mediumDate' }}</small>
+            </div>
+
+            <div class="note-actions">
+              <button type="button" (click)="editNote(note)">Edit</button>
+              <button type="button" (click)="toggleArchive(note)">{{ note.archived ? 'Restore' : 'Archive' }}</button>
+              <button type="button" class="danger" (click)="deleteNote(note)">Delete</button>
+            </div>
+          </article>
+        </div>
+      </section>
+    </section>
+  </main>
+</div>
