@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:5230/api'
+  apiUrl: 'https://noteflow-api-h7m1.onrender.com/api'
 };
